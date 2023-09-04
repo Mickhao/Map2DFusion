@@ -27,6 +27,7 @@
 #include <base/Svar/Svar.h>
 #include <base/time/Global_Timer.h>
 #include <gui/gl/SignalHandle.h>
+#include <fiostream.h>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/stitching/stitcher.hpp>
@@ -751,6 +752,16 @@ void MultiBandMap2DCPU::draw()
                             pi::calcLngLatFromDistance(d->gpsOrigin().x,d->gpsOrigin().y,worldTl.x,worldTl.y,gpsTl.x,gpsTl.y);
                             pi::calcLngLatFromDistance(d->gpsOrigin().x,d->gpsOrigin().y,worldBr.x,worldBr.y,gpsBr.x,gpsBr.y);
 //                            cout<<"world:"<<worldBr<<"origin:"<<d->gpsOrigin()<<endl;
+                            
+                            // 将 gpsTl.x 和 gpsTl.y 写入文本文件
+                            ofstream outputFile("gis.txt");
+                            if (outputFile.is_open())
+                            {
+                                outputFile << "gpsTl.x: " << gpsTl.x << "\n";
+                                outputFile << "gpsTl.y: " << gpsTl.y << "\n";
+                                outputFile.close();
+                            }
+                            
                             cmd<<"Map2DUpdate LastTexMat "<< setiosflags(ios::fixed)
                               << setprecision(9)<<gpsTl<<" "<<gpsBr;
 //                            cout<<cmd.str()<<endl;
