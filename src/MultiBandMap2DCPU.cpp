@@ -755,10 +755,9 @@ void MultiBandMap2DCPU::draw()
                             
                             // 将 gpsTl.x 和 gpsTl.y 写入文本文件
                             ofstream outputFile("gis.txt");
-                            if (outputFile.is_open())
+                            if (outputFile.is_open()) 
                             {
-                                outputFile << "gpsTl.x: " << gpsTl.x << "\n";
-                                outputFile << "gpsTl.y: " << gpsTl.y << "\n";
+                                outputFile << gpsTl.x << " "<< gpsTl.y << "\n";
                                 outputFile.close();
                             }
                             
